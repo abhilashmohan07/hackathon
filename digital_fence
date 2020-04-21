@@ -1,0 +1,119 @@
+#include <stdio.h>
+
+int PersonNumber(int num1 );
+int PersonHealthy( float num2 );
+
+int main()
+{
+
+    //Initialize variables
+    int counter=0;
+    int entry=0;
+    int hlthy=0;
+    
+    //infinite loop for covid digital fence system
+    while( counter <=5 )
+    {
+        //initialize temp variables
+        int i;
+        int value=0;
+        float x=0.0;
+        int flag=0;
+        
+        printf("\n ************************COVID DIGITAL FENSE******************************");
+        printf("\n Choose the options:");
+        printf("\n 1) Person entry");
+        printf("\n 2) Person exit \n");
+		printf("\n Enter the option: ");
+        scanf("%d", &value);
+		
+		//Signal from the Digital Fence
+		entry=PersonNumber( value );
+		
+        
+        //condition to test a person entry or exit
+        if (entry == 1) 
+        {
+                    //to check a person healthy or unhealthy by covid temperature system
+           printf("\n Enter Temperature of patient [ Normal b/w 97F and 99F ] \n ");
+		   printf("\n Enter the option: ");
+           scanf("%f", &x);
+		   
+		   //Signal from Temperature Control Unit
+		   hlthy=PersonHealthy( x );
+		   
+           if (hlthy == 0 )
+            counter=counter + 1;
+           else if ( hlthy == 1)
+            {
+             flag=1;
+            }
+			else
+			{
+				 printf("\n Not a valid selection");
+			}
+        }
+        else if (entry == 0)
+        {
+           counter=counter - 1;
+		   if ( counter < 0 )
+			   counter =0;
+        }
+        else
+        {
+           printf("\n Not a valid selection"); 
+        }
+        
+        printf("\n No of Persons Inside the premise : %d", counter);
+		printf("\n");
+        /*if a person identified as unhealthy sent the message to control monitor 
+        and close the digital fence by isolating the person inside the digital fense*/
+        if (flag == 1)
+        {
+            printf("\n ******Person is identified Unhealthy******\n");
+        }
+        
+        if (counter > 5)
+        {
+            printf("\n ******Maximum limit reached.. Please wait till a person exit******\n");
+        }
+               
+        
+    }
+	return 0;
+}
+
+
+//Signal function for Entry and Exit
+int PersonNumber(int num1 )
+{
+	int n=0;
+	if ( num1 == 1 )
+	{
+		n=1;
+	}
+	else if ( num1 == 2)
+	{
+		n=0;
+	}
+	else 
+		n=10;
+	return n;
+}
+
+//Signal function for Temperature controller
+int PersonHealthy( float num2 )
+{
+	int y=0;
+	if ( num2 >=97  &&  num2 <=99 )
+	{
+		y=0;
+	}
+	else if ( num2 > 99 )
+	{
+		y=1;
+	}
+	else
+		y=10;
+	return y;
+}
